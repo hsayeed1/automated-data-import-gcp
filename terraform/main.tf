@@ -46,4 +46,5 @@ resource "google_service_account_key" "data_pipeline_sa_key" {
 # Output the service account key for manual download
 output "service_account_key" {
   value = google_service_account_key.data_pipeline_sa_key.private_key
+  sensitive = true
 }
