@@ -27,4 +27,4 @@ jobs:
             --replace \
             --source_format=CSV \
             customers_data.customer_info \
-            ./data/flatfile.txt
+            ./flatfile.txt
