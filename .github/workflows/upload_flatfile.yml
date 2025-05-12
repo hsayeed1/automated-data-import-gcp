@@ -1,0 +1,30 @@
+name: Upload Flat File to BigQuery
+
+on:
+  workflow_dispatch:  # Allows the workflow to be triggered manually
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up gcloud CLI
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: data-pipeline-project-humayra
+
+      - name: Upload to BigQuery
+        run: |
+          bq load \
+            --replace \
+            --source_format=CSV \
+            customers_data.customer_info \
+            ./data/flatfile.txt
