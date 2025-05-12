@@ -43,10 +43,6 @@ resource "google_service_account_key" "data_pipeline_sa_key" {
   private_key_type   = "TYPE_GOOGLE_CREDENTIALS_FILE"
 }
 
-resource "local_file" "service_account_key_file" {
-  content  = google_service_account_key.data_pipeline_sa_key.private_key
-  filename = "${path.module}/service_account_key.json"
-}
 
 # Output the service account key for manual download
 output "service_account_key" {
